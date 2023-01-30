@@ -4,7 +4,14 @@
 
 {% block contenido %}
 
-<div class="card">
+<style>
+    .card {
+        text-align: center;
+        align-items: center;
+    }
+</style>
+
+<div class="card w-100 d-flex align-items-center justify-content-center">
     <div class="card-header">
         <a name="" id="" class="btn btn-success" href="{% url 'crear' %}" role="button"><svg
                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -23,9 +30,11 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Título</th>
-                        <th scope="col">Imagen</th>
+                        <th scope="col">Portada</th>
                         <th scope="col">Descripción 3</th>
                         <th scope="col">Acciones</th>
+                        <th scope="col">Likes</th>
+                        <th scope="col">Comentarios</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,24 +42,45 @@
                     {% for libro in libros%}
 
                     <tr>
-                        <td>{{ libro.id }}</td>
+                        <td><b>{{ libro.id }}</b></td>
                         <td>{{ libro.titulo }}</td>
-                        <td><img src="{{ libro.imagen.url }}" alt="" height="100px" width="100px"></td>
+                        <td><img src="{{ libro.imagen.url }}" alt="" height="170px" width="120px"></td>
                         <td>{{ libro.descripcion }}</td>
-                        <td><a name="" id="" class="btn btn-info" href="{% url 'editar' libro.id %}" role="button"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-pencil" viewBox="0 0 16 16">
-                                    <path
-                                        d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                                </svg> Editar</a> | <a name="" id="" class="btn btn-danger"
-                                href="{% url 'eliminar' libro.id %}" role="button"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-trash" viewBox="0 0 16 16">
+                        <td><a name="" id="" class="btn btn-danger" href="{% url 'eliminar' libro.id %}"
+                                role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                     <path
                                         d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
                                     <path fill-rule="evenodd"
                                         d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                </svg> Borrar</a></td>
+                                </svg></a> | <a name="" id="" class="btn btn-info" href="{% url 'editar' libro.id %}"
+                                role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                    <path
+                                        d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                                </svg></a> | <a name="" id="" class="btn btn-danger" href="{% url 'like' libro.id %}"
+                                role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                </svg></a> |
+                        </td>
+                        <td><b>Total Likes: {{ libro.likes }}</b></td>
+                        <td>
+                            <form action="{% url 'comentar' libro.id %}" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="comentario">Comentario:</label>
+                                    <textarea name="comentario" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="autor">Autor:</label>
+                                    <input type="text" name="autor" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn btn-secondary">Añadir Comentario</button>
+                                <a href="{% url 'ver_comentarios' libro.id %}" class="btn btn-info">Ver comentarios</a>
+                            </form>
+                        </td>
                     </tr>
 
                     {% endfor %}
@@ -60,8 +90,15 @@
 
     </div>
     <div class="card-footer text-muted">
-        Ghenciu Nicolae Adrian
+        Ghenciu Nicolae Adrian 2023
     </div>
 </div>
 
 {% endblock %}
+
+<!-- <a href="{% url 'like' libro.id %}"><svg
+    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+    class="bi bi-heart-fill" viewBox="0 0 16 16">
+    <path fill-rule="evenodd"
+        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+</svg></a> -->

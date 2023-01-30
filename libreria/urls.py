@@ -12,4 +12,7 @@ urlpatterns = [
     path('libros/editar', views.editar, name="editar"),
     path('eliminar/<int:id>', views.eliminar, name="eliminar"),
     path('libros/editar/<int:id>', views.editar, name="editar"),
+    path('like/<int:id_libro>', views.like, name="like"),
+    path('libros/<int:id_libro>/comentar', views.comentar, name="comentar"),
+    path('comentarios/<int:id_libro>', views.ver_comentarios, name='ver_comentarios'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

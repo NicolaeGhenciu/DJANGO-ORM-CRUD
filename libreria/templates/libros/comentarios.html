@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block titulo %} Inicio {% endblock %}
+
+{% block contenido %}
+
+<h1>Comentarios del libro {{ libro.titulo }}</h1>
+<ul class="list-group">
+    {% for comentario in comentarios %}
+    <li class="list-group-item">
+        <p class="font-weight-bold"><b>Comentario:</b> {{ comentario.comentario }}</p>
+        <p class="text-muted">{{ comentario.autor }} - {{ comentario.fecha }} - {{ comentario.libro }}</p>
+    </li>
+    {% endfor %}
+</ul>
+
+<br>
+
+<a class="btn btn-primary boton" href="{% url 'libros' %}"> Volver atrás </a>
+
+{% endblock %}
